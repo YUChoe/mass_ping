@@ -5,7 +5,7 @@ with open('README.md', 'r') as fp:
 
 setup(
     name='mass-ping',
-    version='1',
+    version='2',
     author='Tom YU Choe',
     author_email='yonguk.choe@gmail.com',
     description='A threaded ICMP ping using /bin/ping, ping.exe.',
