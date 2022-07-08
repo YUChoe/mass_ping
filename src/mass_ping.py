@@ -2,6 +2,7 @@ import subprocess
 import threading
 from socket import inet_aton
 import time
+import os
 
 
 def is_format_ip(ip):
@@ -31,8 +32,11 @@ class MassPing(object):
 
     """
     def each_ping(self, ip):
-        ping_cmd = ['ping', '-c', '1', '-W', '1', ip]
-        ret = subprocess.call(ping_cmd, stdout=open('/dev/null', 'w'), stderr=open('/dev/null', 'w'))
+        if os.name == 'nt':
+            ping_cmd = ['ping.exe', '-n', '1', ip]
+        else:
+            ping_cmd = ['ping', '-c', '1', '-W', '1', ip]        
+        ret = subprocess.call(ping_cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         return ret == 0
 
     def ping(self, ip, test_count):
